@@ -1,0 +1,73 @@
+:root {
+  /* Paleta Práctica Constante — color de marca único: azul #0780FE.
+     Se conservan los nombres de variables (--rust, --olive, --peach) para no
+     tocar cada archivo: ahora todos apuntan a tonos de azul. */
+  --cream: #f1eadc;
+  --ink: #201c15;
+  /* Acento de marca (antes naranja) */
+  --rust: #0780fe;
+  --rust-dark: #0561c4;
+  --sand: #e7ddc9;
+  --sand-2: #d3c6ab;
+  --sand-3: #ddd1b8;
+  /* Banda oscura de marca (antes verde oliva) */
+  --olive: #0a3a6b;
+  --olive-warm: #f7efe2;
+  /* Acento claro sobre fondos oscuros (antes durazno) */
+  --peach: #6db3ff;
+  --muted: #4a4438;
+
+  /* Degradado oscuro azulado para secciones tipo "incluye" / "pilares" */
+  --dark-1: #0b2f5e;
+  --dark-2: #071d3a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Hanken Grotesk", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--rust);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--rust-dark);
+}
+
+@keyframes pcBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    scroll-behavior: auto;
+  }
+}

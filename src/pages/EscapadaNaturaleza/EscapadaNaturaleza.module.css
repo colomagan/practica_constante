@@ -1,0 +1,784 @@
+.page {
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ============ ELEMENTOS COMPARTIDOS ============ */
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 1.2rem;
+}
+.eyebrowPeach {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 1.2rem;
+}
+
+.h2 {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 5.5vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.h2Light {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 5.5vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+}
+
+.body {
+  color: var(--muted);
+  font-size: 1.06rem;
+  margin-bottom: 1.1rem;
+  text-wrap: pretty;
+}
+.body:last-child {
+  margin-bottom: 0;
+}
+.bodyWide {
+  color: var(--muted);
+  font-size: 1.06rem;
+  max-width: 60ch;
+  margin-bottom: 2.6rem;
+  text-wrap: pretty;
+}
+
+.section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem clamp(1.25rem, 5vw, 4rem) 5rem;
+  overflow: hidden;
+}
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #0a1f37;
+  background-size: cover;
+  background-position: center;
+}
+.heroPlaceholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: rgba(241, 234, 220, 0.3);
+}
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 22, 14, 0.55) 0%,
+    rgba(20, 22, 14, 0.3) 40%,
+    rgba(20, 22, 14, 0.8) 100%
+  );
+}
+.heroInner {
+  position: relative;
+  z-index: 3;
+  max-width: 1150px;
+}
+.heroKicker {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(241, 234, 220, 0.8);
+  margin-bottom: 1.4rem;
+}
+.heroTitle {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--cream);
+  font-size: clamp(2.6rem, 10vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+.heroSub {
+  margin-top: 1.6rem;
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.4vw, 1.6rem);
+  color: rgba(241, 234, 220, 0.9);
+  max-width: 44ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: pretty;
+}
+.heroTags {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+}
+.heroTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  background: rgba(241, 234, 220, 0.1);
+  border: 1px solid rgba(241, 234, 220, 0.25);
+  color: var(--cream);
+  padding: 0.55em 1.1em;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  background: var(--rust);
+  color: #fff;
+  padding: 1em 2.2em;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-top: 2rem;
+}
+.heroCta:hover {
+  color: #fff;
+}
+.scrollDown {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  color: rgba(241, 234, 220, 0.7);
+}
+.scrollCircle {
+  display: block;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(241, 234, 220, 0.4);
+  border-radius: 50%;
+  position: relative;
+  animation: pcBounce 2.2s ease-in-out infinite;
+}
+.scrollArrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--cream);
+  border-bottom: 1.5px solid var(--cream);
+  transform: translate(-50%, -70%) rotate(45deg);
+}
+
+/* ============ INTRO BAND ============ */
+.introBand {
+  background: var(--olive);
+  color: var(--olive-warm);
+  padding: clamp(4rem, 10vh, 7rem) clamp(1.25rem, 5vw, 4rem);
+  text-align: center;
+}
+.introText {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Hanken Grotesk";
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2.6vw, 1.9rem);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.introEm {
+  font-family: "Fraunces", serif;
+  color: var(--peach);
+}
+
+/* ============ QUÉ ES ============ */
+.queEsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+.lead {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-bottom: 1.4rem;
+}
+
+/* ============ PARA QUIÉN ============ */
+.paraQuien {
+  background: var(--sand);
+  border-top: 1px solid rgba(32, 28, 21, 0.12);
+  border-bottom: 1px solid rgba(32, 28, 21, 0.12);
+  padding: clamp(5rem, 12vh, 8rem) clamp(1.25rem, 5vw, 4rem);
+}
+.paraQuienInner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.paraQuienInner .h2 {
+  margin-bottom: 1.4rem;
+}
+.checkList {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.4rem;
+}
+.checkItem {
+  display: flex;
+  gap: 0.8rem;
+  background: var(--cream);
+  border: 1px solid rgba(32, 28, 21, 0.1);
+  border-radius: 12px;
+  padding: 1.2rem 1.3rem;
+  font-size: 1rem;
+  color: var(--ink);
+  transition:
+    transform 0.35s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.35s,
+    border-color 0.35s;
+}
+.checkItem:hover {
+  transform: translateY(-4px);
+  border-color: rgba(192, 81, 43, 0.4);
+  box-shadow: 0 22px 40px -28px rgba(32, 28, 21, 0.5);
+}
+.dot {
+  color: var(--rust);
+  font-weight: 800;
+  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.checkItem:hover .dot {
+  transform: scale(1.4);
+}
+@media (max-width: 620px) {
+  .checkList {
+    grid-template-columns: 1fr;
+  }
+}
+.quoteSm {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--ink);
+}
+
+/* ============ HUGO MINI ============ */
+.hugoMiniWrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(4rem, 9vh, 6rem) clamp(1.25rem, 5vw, 4rem) 0;
+}
+.hugoMini {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  background: var(--sand);
+  border: 1px solid rgba(32, 28, 21, 0.12);
+  border-radius: 18px;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  max-width: 760px;
+  flex-wrap: wrap;
+}
+.hugoAvatar {
+  flex: 0 0 auto;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--sand-2);
+}
+.hugoMiniText {
+  flex: 1 1 260px;
+}
+.hugoLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 0.5rem;
+}
+.hugoQuote {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+/* ============ ASPECTOS (Qué vas a vivir) ============ */
+.aspectosGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-top: 2.6rem;
+}
+@media (max-width: 860px) {
+  .aspectosGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .aspectosGrid {
+    grid-template-columns: 1fr;
+  }
+}
+.aspectoCard {
+  background: var(--sand);
+  border: 1px solid rgba(32, 28, 21, 0.1);
+  border-radius: 16px;
+  padding: 1.8rem;
+  transition:
+    transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.4s,
+    border-color 0.4s;
+}
+.aspectoCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(192, 81, 43, 0.4);
+  box-shadow: 0 28px 50px -32px rgba(32, 28, 21, 0.55);
+}
+.cardTitleRust {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+  color: var(--rust);
+}
+.cardBody {
+  color: var(--muted);
+  font-size: 0.98rem;
+  text-wrap: pretty;
+}
+
+/* ============ QUÉ INCLUYE ============ */
+.incluye {
+  background: linear-gradient(135deg, var(--dark-1) 0%, var(--dark-2) 100%);
+  color: var(--cream);
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.25rem, 5vw, 4rem);
+}
+.incluyeInner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.incluyeInner .h2Light {
+  margin-bottom: 1rem;
+}
+.incluyeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2.6rem;
+}
+.incluyeCard {
+  background: rgba(241, 234, 220, 0.05);
+  border: 1px solid rgba(241, 234, 220, 0.14);
+  border-radius: 16px;
+  padding: 1.9rem;
+  transition:
+    transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+    background 0.4s,
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+.incluyeCard:hover {
+  transform: translateY(-6px);
+  background: rgba(241, 234, 220, 0.09);
+  border-color: rgba(255, 190, 152, 0.45);
+  box-shadow: 0 30px 55px -35px rgba(0, 0, 0, 0.6);
+}
+.cardTitlePeach {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: 1.55rem;
+  margin-bottom: 0.8rem;
+  color: var(--peach);
+}
+.cardBodyLight {
+  color: rgba(241, 234, 220, 0.78);
+  font-size: 0.98rem;
+  text-wrap: pretty;
+}
+.nota {
+  color: rgba(241, 234, 220, 0.5);
+  font-size: 0.82rem;
+  margin-top: 0.8rem;
+}
+
+/* ============ ITINERARIO ============ */
+.itinerario {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.25rem, 5vw, 4rem);
+}
+.itinerario .h2 {
+  margin-bottom: 1.2rem;
+}
+.days {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.day {
+  border: 1px solid rgba(32, 28, 21, 0.14);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--sand);
+}
+.daySummary {
+  cursor: pointer;
+  padding: 1.5rem 1.6rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  list-style: none;
+}
+.daySummary::-webkit-details-marker {
+  display: none;
+}
+.dayTag {
+  font-family: "Fraunces", serif;
+  color: var(--rust);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.dayTitle {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+.dayBody {
+  padding: 0 1.6rem 1.7rem;
+  color: var(--muted);
+  display: grid;
+  gap: 1.2rem;
+}
+.dayBlockLabel {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ============ EL LUGAR ============ */
+.lugar {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem clamp(1.25rem, 5vw, 4rem);
+  overflow: hidden;
+}
+.lugarBg {
+  position: absolute;
+  inset: 0;
+  background-color: #0a1f37;
+  background-size: cover;
+  background-position: center;
+}
+.lugarPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.8rem;
+  color: rgba(241, 234, 220, 0.24);
+}
+.lugarScrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 22, 14, 0.62);
+}
+.lugarInner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+.lugarTitle {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--cream);
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+}
+.lugarText {
+  color: rgba(241, 234, 220, 0.85);
+  font-size: 1.1rem;
+  text-wrap: pretty;
+}
+
+/* ============ EL EQUIPO ============ */
+.equipoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.6rem;
+}
+.equipoCard {
+  background: var(--sand);
+  border: 1px solid rgba(32, 28, 21, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.equipoFoto {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: repeating-linear-gradient(45deg, var(--sand-2) 0 12px, var(--sand-3) 12px 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: #8b8069;
+}
+.equipoBody {
+  padding: 1.6rem;
+}
+.equipoNombre {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+.equipoRol {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 0.9rem;
+}
+.equipoParrafo {
+  color: var(--muted);
+  font-size: 0.96rem;
+  margin-bottom: 0.8rem;
+  text-wrap: pretty;
+}
+.equipoParrafo:last-child {
+  margin-bottom: 0;
+}
+.quoteLg {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 800px;
+  margin: 3rem 0 0;
+  text-wrap: pretty;
+}
+
+/* ============ GALERÍA ============ */
+.galeria {
+  background: var(--sand);
+  border-top: 1px solid rgba(32, 28, 21, 0.12);
+  padding: clamp(4rem, 10vh, 7rem) clamp(1.25rem, 5vw, 4rem);
+}
+.galeriaInner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.galeriaInner .eyebrow {
+  margin-bottom: 1.8rem;
+}
+.galeriaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.galeriaFoto {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 12px;
+  background-color: var(--sand-2);
+}
+
+/* ============ HUGO (mascota) ============ */
+.hugo {
+  background: var(--olive);
+  color: var(--olive-warm);
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.25rem, 5vw, 4rem);
+}
+.hugoGrid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(2rem, 6vw, 4rem);
+  align-items: center;
+}
+.hugoImgWrap {
+  display: flex;
+  justify-content: center;
+}
+.hugoImg {
+  width: min(320px, 82%);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 24px;
+  background: #0c3057;
+  border: 1px solid rgba(247, 239, 226, 0.18);
+}
+.hugo .h2Light {
+  margin-bottom: 1.4rem;
+}
+.hugoText {
+  color: rgba(247, 239, 226, 0.85);
+  font-size: 1.06rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  text-wrap: pretty;
+}
+.hugoBlockquote {
+  border-left: 2px solid var(--peach);
+  padding-left: 1.2rem;
+  margin: 0.8rem 0 0;
+}
+.hugoLabelPeach {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 0.5rem;
+}
+.hugoQuoteLg {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  line-height: 1.4;
+  color: var(--olive-warm);
+}
+
+/* ============ FAQ ============ */
+.faq {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.25rem, 5vw, 4rem);
+}
+.faqList {
+  border-top: 1px solid rgba(32, 28, 21, 0.16);
+}
+.faqItem {
+  border-bottom: 1px solid rgba(32, 28, 21, 0.16);
+}
+.faqSummary {
+  cursor: pointer;
+  padding: 1.4rem 0;
+  font-family: "Fraunces", serif;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  list-style: none;
+}
+.faqSummary::-webkit-details-marker {
+  display: none;
+}
+.faqPlus {
+  color: var(--rust);
+  font-weight: 700;
+}
+.faqAnswer {
+  padding: 0 0 1.4rem;
+  color: var(--muted);
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+
+/* ============ CTA FINAL ============ */
+.cta {
+  position: relative;
+  background: var(--ink);
+  color: var(--cream);
+  padding: clamp(5rem, 15vh, 10rem) clamp(1.25rem, 5vw, 4rem);
+  text-align: center;
+  overflow: hidden;
+}
+.ctaGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 120%, rgba(7, 128, 254, 0.35), transparent 60%);
+}
+.ctaInner {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.ctaTitle {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 6.5vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.4rem;
+}
+.ctaText {
+  font-size: 1.15rem;
+  color: rgba(241, 234, 220, 0.8);
+  max-width: 52ch;
+  margin: 0 auto 1rem;
+  text-wrap: pretty;
+}
+.ctaTextSm {
+  font-size: 1rem;
+  color: rgba(241, 234, 220, 0.6);
+  margin-bottom: 2.4rem;
+}
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  background: var(--rust);
+  color: #fff;
+  padding: 1.1em 2.6em;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.ctaButton:hover {
+  color: #fff;
+}

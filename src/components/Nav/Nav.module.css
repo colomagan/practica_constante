@@ -1,0 +1,250 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.1rem clamp(1.25rem, 5vw, 4rem);
+  background: transparent;
+  transition:
+    background 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+    padding 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.scrolled {
+  background: rgba(32, 28, 21, 0.9);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  box-shadow: 0 1px 0 rgba(241, 234, 220, 0.14);
+}
+
+.brand {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  font-size: 0.92rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+.brand:hover {
+  color: var(--cream);
+}
+
+.links {
+  display: flex;
+  gap: 1.9rem;
+  align-items: center;
+}
+
+/* ===== NAV LINKS + DROPDOWN ===== */
+.navlink {
+  color: rgba(241, 234, 220, 0.85);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.navlink:hover {
+  color: var(--cream);
+}
+
+.hasDd {
+  position: relative;
+}
+
+.dd {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  min-width: 250px;
+  background: rgba(32, 28, 21, 0.97);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgba(241, 234, 220, 0.14);
+  border-radius: 14px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.28s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 0.28s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0 22px 45px -18px rgba(0, 0, 0, 0.65);
+}
+.dd::before {
+  content: "";
+  position: absolute;
+  top: -0.6rem;
+  left: 0;
+  right: 0;
+  height: 0.6rem;
+}
+.hasDd:hover .dd,
+.hasDd:focus-within .dd {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.hasDd:hover .ddCaret {
+  transform: rotate(180deg);
+}
+.ddCaret {
+  font-size: 0.6em;
+  opacity: 0.85;
+  transition: transform 0.28s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.dd a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  color: rgba(241, 234, 220, 0.9);
+  transition: background 0.2s;
+}
+.dd a:hover {
+  background: rgba(241, 234, 220, 0.08);
+  color: var(--cream);
+}
+.ddT {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.ddD {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: rgba(109, 179, 255, 0.9);
+}
+
+.reservar {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.62em 1.3em;
+  border: 1px solid rgba(241, 234, 220, 0.55);
+  border-radius: 100px;
+  color: var(--cream);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+.reservar:hover {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+/* ===== BURGER ===== */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.burger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--cream);
+}
+
+/* ===== MOBILE MENU ===== */
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(32, 28, 21, 0.97);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2rem;
+  text-align: center;
+}
+.mobileLabel {
+  color: rgba(241, 234, 220, 0.45);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: -0.35rem;
+}
+.mobileExp {
+  color: var(--cream);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.mobileExp:hover {
+  color: var(--cream);
+}
+.mobileDivider {
+  width: 44px;
+  height: 1px;
+  background: rgba(241, 234, 220, 0.2);
+  margin: 0.35rem 0;
+}
+.mobileLink {
+  color: var(--cream);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.mobileLink:hover {
+  color: var(--cream);
+}
+.mobileReservar {
+  color: var(--peach);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.mobileClose {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  background: none;
+  border: none;
+  color: var(--cream);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+@media (max-width: 860px) {
+  .links {
+    display: none;
+  }
+  .burger {
+    display: inline-flex;
+  }
+}
