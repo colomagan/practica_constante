@@ -744,7 +744,7 @@
   background: rgba(20, 22, 14, 0.62);
 }
 .lugarInner {
-  position: relative;
+  position: relative; 
   z-index: 2;
   max-width: 760px;
 }
