@@ -15,7 +15,7 @@ export default function Footer({ subtitle = 'Escapada Naturaleza · Chapadmalal 
           </Link>
           <nav className={styles.social} aria-label="Pie">
             <a
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com/practica_constante/"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.iconLink}
