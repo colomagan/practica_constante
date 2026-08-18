@@ -16,6 +16,7 @@ import bono1 from '../../assets/home/bono-1.jpg'
 import bono2 from '../../assets/home/bono-2.jpg'
 import bono3 from '../../assets/home/bono-3.jpg'
 import bono4 from '../../assets/home/bono-4.jpg'
+import diferenciaImg from '../../assets/escapada/gal-2.jpg'
 
 const PILARES = [
   {
@@ -65,6 +66,8 @@ const BONO_FOTOS = [
   { img: bono4, alt: 'Bono en un taller grupal' },
 ]
 
+const WHATSAPP = 'https://wa.link/dukhvd'
+
 export default function Home() {
   const testimoniosRef = useRef(null)
   const [testimoniosPlaying, setTestimoniosPlaying] = useState(false)
@@ -78,7 +81,7 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <Nav reservarHref="/escapada" />
+      <Nav reservarHref={WHATSAPP} />
 
       {/* ===== HERO ===== */}
       <section id="top" className={styles.hero}>
@@ -94,16 +97,18 @@ export default function Home() {
         />
         <div className={styles.heroScrim} />
         <div className={styles.heroInner}>
-          <p className={styles.heroKicker}>Práctica Constante</p>
-          <h1 className={styles.heroTitle}>
+          <p className={`${styles.heroKicker} pcHeroReveal`} style={{ animationDelay: '0.1s' }}>
+            Práctica Constante
+          </p>
+          <h1 className={`${styles.heroTitle} pcHeroReveal`} style={{ animationDelay: '0.25s' }}>
             Entrená para moverte mejor.
             <br />
             Practicá para vivir distinto.
           </h1>
-          <p className={styles.heroSub}>
+          <p className={`${styles.heroSub} pcHeroReveal`} style={{ animationDelay: '0.45s' }}>
             El movimiento puede transformar mucho más que tu cuerpo.
           </p>
-          <div className={styles.heroCtas}>
+          <div className={`${styles.heroCtas} pcHeroReveal`} style={{ animationDelay: '0.65s' }}>
             <Link to="/escapada" className={styles.ctaPrimary}>
               Quiero participar
             </Link>
@@ -121,65 +126,75 @@ export default function Home() {
 
       {/* ===== INTRO (bajada del hero) ===== */}
       <section id="intro" className={styles.introBand}>
+        <div className={styles.introGlow} />
         <Reveal as="p" className={styles.introLead}>
-          En Práctica Constante creemos que entrenar no significa solamente ganar fuerza o
-          mejorar una técnica. Significa desarrollar herramientas para vivir con mayor presencia,
+          En <strong>Práctica Constante</strong> creemos que entrenar no significa solamente
+          ganar fuerza o mejorar una técnica.
+          <br />
+          Significa <strong>desarrollar herramientas</strong> para vivir con mayor presencia,
           adaptarte a nuevos desafíos y descubrir nuevas formas de relacionarte con vos mismo y
           con los demás.
         </Reveal>
         <Reveal as="p" delay={0.1} className={styles.introText}>
-          Cada clase, cada LAB y cada Escapada nace con un mismo propósito: convertir el
-          movimiento en una práctica que trascienda el entrenamiento.
+          Cada clase, cada LAB y cada Escapada nace con un mismo propósito:
+          <br />
+          <strong>convertir el movimiento en una práctica que trascienda el entrenamiento.</strong>
         </Reveal>
       </section>
 
       {/* ===== QUÉ NOS DIFERENCIA ===== */}
       <section className={styles.section}>
         <div className={styles.diferenciaInner}>
-          <Reveal as="p" className={styles.eyebrow}>
-            Qué nos diferencia
-          </Reveal>
-          <Reveal as="h2" delay={0.06} className={styles.h2}>
-            No es un gimnasio.
-            <br />
-            Es una práctica.
-          </Reveal>
-          <Reveal delay={0.1} className={styles.diferenciaText}>
-            <p className={styles.body}>
-              Durante años el entrenamiento estuvo asociado únicamente al rendimiento o a la
-              estética.
-            </p>
-            <p className={styles.body}>
-              En Práctica Constante creemos que existe otra posibilidad. Una donde el movimiento
-              también sea juego. Donde la exploración tenga tanto valor como el resultado. Donde
-              entrenar sirva para desarrollar un cuerpo más adaptable, una mente más curiosa y una
-              mejor forma de habitar la vida cotidiana.
-            </p>
-            <p className={styles.bodyStrong}>
-              No buscamos que hagas más. Buscamos que descubras nuevas maneras de moverte,
-              aprender y crecer.
-            </p>
+          <div className={styles.diferenciaCol}>
+            <Reveal as="p" className={styles.eyebrow}>
+              Qué nos diferencia
+            </Reveal>
+            <Reveal as="h2" delay={0.06} className={styles.h2}>
+              No es un gimnasio.
+              <br />
+              Es una práctica.
+            </Reveal>
+            <Reveal delay={0.1} className={styles.diferenciaText}>
+              <p className={styles.body}>
+                Durante años el entrenamiento estuvo asociado únicamente al rendimiento o a la
+                estética.
+              </p>
+              <p className={styles.body}>
+                En Práctica Constante creemos que existe otra posibilidad. Una donde el movimiento
+                también sea juego. Donde la exploración tenga tanto valor como el resultado. Donde
+                entrenar sirva para desarrollar un cuerpo más adaptable, una mente más curiosa y una
+                mejor forma de habitar la vida cotidiana.
+              </p>
+              <p className={styles.bodyStrong}>
+                No buscamos que hagas más. Buscamos que descubras nuevas maneras de moverte,
+                aprender y crecer.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={0.12} variant="right" className={styles.diferenciaFigure}>
+            <img src={diferenciaImg} alt="Práctica en movimiento" />
           </Reveal>
         </div>
       </section>
 
       {/* ===== HUGO (tras "No es un gimnasio") ===== */}
-      <HugoSays quote="Cuando dejás de entrenar para demostrar algo, empezás a descubrir todo lo que el movimiento puede enseñarte." />
+      <HugoSays tight quote="Cuando dejás de entrenar para demostrar algo, empezás a descubrir todo lo que el movimiento puede enseñarte." />
 
       {/* ===== PILARES ===== */}
       <section className={styles.pilares}>
+        <div className={styles.pilaresGlow} />
         <div className={styles.pilaresInner}>
           <Reveal as="p" className={styles.eyebrowPeach}>
             Nuestros pilares
           </Reveal>
           <Reveal as="h2" delay={0.06} className={styles.h2Light}>
-            Cuatro maneras de
+            4 maneras de
             <br />
             entender el movimiento
           </Reveal>
           <div className={styles.pilaresGrid}>
             {PILARES.map((p, i) => (
-              <Reveal key={p.titulo} delay={i * 0.06} className={styles.pilarCard}>
+              <Reveal key={p.titulo} delay={i * 0.08} variant="scale" className={styles.pilarCard}>
                 <span className={styles.pilarNum}>0{i + 1}</span>
                 <h3 className={styles.pilarTitle}>{p.titulo}</h3>
                 <p className={styles.pilarText}>{p.texto}</p>
@@ -244,7 +259,7 @@ export default function Home() {
       {/* ===== SOBRE BONO ===== */}
       <section id="nosotros" className={styles.section}>
         <div className={styles.bonoGrid}>
-          <Reveal className={styles.bonoText}>
+          <Reveal variant="left" className={styles.bonoText}>
             <p className={styles.eyebrow}>Sobre Bono</p>
             <h2 className={styles.h2}>El origen de la práctica</h2>
             <p className={styles.body}>
@@ -256,11 +271,14 @@ export default function Home() {
             <p className={styles.body}>
               Esa búsqueda lo llevó a integrar movilidad, fuerza, juego, improvisación,
               respiración y experiencias en la naturaleza dentro de una misma metodología. Así
-              surge Práctica Constante: un espacio donde el movimiento se convierte en una
-              herramienta de aprendizaje, presencia y transformación.
+              surge Práctica Constante:{' '}
+              <strong>
+                un espacio donde el movimiento se convierte en una herramienta de aprendizaje,
+                presencia y transformación.
+              </strong>
             </p>
           </Reveal>
-          <Reveal delay={0.1} className={styles.bonoCollage}>
+          <Reveal delay={0.1} variant="right" className={styles.bonoCollage}>
             {BONO_FOTOS.map((f, i) => (
               <img key={i} className={styles.bonoFoto} src={f.img} alt={f.alt} loading="lazy" />
             ))}
@@ -269,10 +287,11 @@ export default function Home() {
       </section>
 
       {/* ===== HUGO (tras Sobre Bono) ===== */}
-      <HugoSays quote="Toda práctica empieza con una pregunta." />
+      <HugoSays tight quote="Toda práctica empieza con una pregunta." />
 
       {/* ===== TESTIMONIOS (video) ===== */}
       <section id="testimonios" className={styles.testimonios}>
+        <p className={styles.testimoniosTitle}>Testimonios de nuestros participantes</p>
         <video
           ref={testimoniosRef}
           className={styles.testimoniosVideo}
@@ -304,14 +323,19 @@ export default function Home() {
         <Reveal className={styles.cierreInner}>
           <h2 className={styles.cierreTitle}>No importa desde dónde empezás.</h2>
           <p className={styles.cierreText}>Lo importante es empezar a practicar.</p>
-          <a href="#contacto" className={styles.cierreCta}>
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.cierreCta}
+          >
             Quiero recibir información
           </a>
         </Reveal>
       </section>
 
       <Footer subtitle="Movimiento, juego y presencia" />
-      <WhatsAppButton href="/escapada" />
+      <WhatsAppButton href={WHATSAPP} />
     </div>
   )
 }

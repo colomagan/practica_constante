@@ -65,9 +65,69 @@ a:hover {
   }
 }
 
+/* ====== ANIMACIONES COMPARTIDAS ====== */
+
+/* Entrada escalonada del hero (se dispara al cargar). */
+@keyframes pcHeroIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Zoom lento tipo "ken burns" para fondos de hero. */
+@keyframes pcKenBurns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+/* Deriva suave para los glows radiales de fondo. */
+@keyframes pcFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3%) scale(1.05);
+  }
+}
+
+/* Anillo pulsante (botón de play, FAB de WhatsApp). */
+@keyframes pcPulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Utilidad global de entrada del hero: aplicar junto a delays inline. */
+.pcHeroReveal {
+  opacity: 0;
+  animation: pcHeroIn 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
     scroll-behavior: auto;
+  }
+  .pcHeroReveal {
+    opacity: 1 !important;
   }
 }

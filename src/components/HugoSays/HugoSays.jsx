@@ -10,9 +10,9 @@ import hugoImg from '../../assets/hugo/hugo.png'
  * @param {string} quote  la frase de Hugo (1–2 líneas).
  * @param {'light'|'dark'} tone  paleta según el fondo de la sección.
  */
-export default function HugoSays({ quote, tone = 'light' }) {
+export default function HugoSays({ quote, tone = 'light', tight = false }) {
   return (
-    <div className={styles.wrap}>
+    <div className={`${styles.wrap} ${tight ? styles.tight : ''}`}>
       <Reveal className={`${styles.card} ${tone === 'dark' ? styles.dark : ''}`}>
         <img className={styles.avatar} src={hugoImg} alt="Hugo" />
         <div className={styles.text}>

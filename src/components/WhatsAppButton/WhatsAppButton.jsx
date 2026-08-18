@@ -8,6 +8,8 @@ export default function WhatsAppButton({ href = '#reservar' }) {
   return (
     <a
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       aria-label="WhatsApp"
       title="Escribinos por WhatsApp"
       className={styles.fab}

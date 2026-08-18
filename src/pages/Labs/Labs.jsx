@@ -19,12 +19,18 @@ export default function Labs() {
         />
         <div className={styles.heroScrim} />
         <div className={styles.heroInner}>
-          <p className={styles.kicker}>Experiencias · LABs</p>
-          <h1 className={styles.title}>LABs</h1>
-          <p className={styles.sub}>
-            Página en construcción. Encuentros intensivos de exploración corporal y creativa.
+          <p className={`${styles.kicker} pcHeroReveal`} style={{ animationDelay: '0.1s' }}>
+            Experiencias · LABs
           </p>
-          <Link to="/" className={styles.cta}>
+          <h1 className={`${styles.title} pcHeroReveal`} style={{ animationDelay: '0.25s' }}>
+            LABs
+          </h1>
+          <p className={`${styles.sub} pcHeroReveal`} style={{ animationDelay: '0.45s' }}>
+            Encuentros intensivos de exploración corporal y creativa.
+            <br />
+            Próximamente, nuevos LABs
+          </p>
+          <Link to="/" className={`${styles.cta} pcHeroReveal`} style={{ animationDelay: '0.62s' }}>
             Volver al inicio
           </Link>
         </div>

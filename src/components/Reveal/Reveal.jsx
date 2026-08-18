@@ -7,11 +7,13 @@ import styles from './Reveal.module.css'
  *
  * @param {string}  as         etiqueta a renderizar (div, p, h2, ul, article...)
  * @param {number}  delay      retraso de la transición en segundos (stagger)
+ * @param {'up'|'left'|'right'|'scale'|'blur'} variant  dirección/estilo de entrada
  * @param {string}  className  clases extra
  */
 export default function Reveal({
   as: Tag = 'div',
   delay = 0,
+  variant = 'up',
   className = '',
   children,
   ...rest
@@ -47,7 +49,7 @@ export default function Reveal({
   return (
     <Tag
       ref={ref}
-      className={`${styles.reveal} ${visible ? styles.visible : ''} ${className}`.trim()}
+      className={`${styles.reveal} ${styles[variant] || ''} ${visible ? styles.visible : ''} ${className}`.trim()}
       style={{ transitionDelay: `${delay}s` }}
       {...rest}
     >

@@ -3,17 +3,39 @@
   transform: translateY(26px);
   transition:
     opacity 0.9s cubic-bezier(0.19, 1, 0.22, 1),
-    transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+    transform 0.9s cubic-bezier(0.19, 1, 0.22, 1),
+    filter 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: opacity, transform;
+}
+
+/* Variantes de entrada (dirección / estilo) */
+.up {
+  transform: translateY(26px);
+}
+.left {
+  transform: translateX(-38px);
+}
+.right {
+  transform: translateX(38px);
+}
+.scale {
+  transform: scale(0.92);
+}
+.blur {
+  transform: translateY(18px);
+  filter: blur(10px);
 }
 
 .visible {
   opacity: 1;
   transform: none;
+  filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
   }
 }

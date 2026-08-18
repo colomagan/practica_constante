@@ -45,6 +45,7 @@
 
 /* ===== NAV LINKS + DROPDOWN ===== */
 .navlink {
+  position: relative;
   color: rgba(241, 234, 220, 0.85);
   font-size: 0.8rem;
   font-weight: 600;
@@ -53,9 +54,27 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
+  transition: color 0.25s;
+}
+/* Subrayado que crece desde la izquierda al pasar el mouse. */
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 100%;
+  background: var(--peach);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.19, 1, 0.22, 1);
 }
 .navlink:hover {
   color: var(--cream);
+}
+.navlink:hover::after,
+.hasDd:hover .navlink::after {
+  transform: scaleX(1);
 }
 
 .hasDd {
@@ -149,11 +168,13 @@
   text-transform: uppercase;
   transition:
     background 0.3s,
-    color 0.3s;
+    color 0.3s,
+    transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 }
 .reservar:hover {
   background: var(--cream);
   color: var(--ink);
+  transform: translateY(-2px);
 }
 
 /* ===== BURGER ===== */

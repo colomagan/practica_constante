@@ -21,6 +21,7 @@
   background-color: #0a1f37;
   background-size: cover;
   background-position: center;
+  animation: pcKenBurns 18s ease-in-out infinite alternate;
 }
 .heroScrim {
   position: absolute;
@@ -68,7 +69,14 @@
   border-radius: 100px;
   font-weight: 700;
   margin-top: 1rem;
+  transition:
+    background 0.3s,
+    transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.3s;
 }
 .cta:hover {
   color: #fff;
+  background: var(--rust-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px -14px rgba(7, 128, 254, 0.7);
 }

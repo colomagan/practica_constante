@@ -80,6 +80,7 @@
   background-color: #0a1f37;
   background-size: cover;
   background-position: center 30%;
+  animation: pcKenBurns 18s ease-in-out infinite alternate;
 }
 .heroPlaceholder {
   position: absolute;
@@ -122,8 +123,8 @@
   font-weight: 800;
   text-transform: uppercase;
   color: var(--cream);
-  font-size: clamp(2.3rem, 7vw, 6rem);
-  line-height: 0.95;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
   letter-spacing: -0.02em;
 }
 .heroSub {
@@ -151,10 +152,19 @@
   border-radius: 100px;
   font-weight: 700;
   font-size: 0.95rem;
+  transition:
+    background 0.3s,
+    transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.3s;
 }
 .ctaPrimary:hover {
   color: #fff;
   background: var(--rust-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px -14px rgba(7, 128, 254, 0.7);
+}
+.ctaPrimary:active {
+  transform: translateY(-1px);
 }
 .ctaSecondary {
   display: inline-flex;
@@ -167,11 +177,13 @@
   font-size: 0.95rem;
   transition:
     background 0.3s,
-    color 0.3s;
+    color 0.3s,
+    transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 }
 .ctaSecondary:hover {
   background: var(--cream);
   color: var(--ink);
+  transform: translateY(-3px);
 }
 .scrollDown {
   position: absolute;
@@ -203,34 +215,63 @@
 
 /* ============ INTRO BAND ============ */
 .introBand {
+  position: relative;
+  overflow: hidden;
   background: var(--olive);
   color: var(--olive-warm);
   padding: clamp(4rem, 11vh, 7rem) clamp(1.25rem, 5vw, 4rem);
   text-align: center;
 }
+.introGlow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% -20%, rgba(109, 179, 255, 0.28), transparent 55%),
+    radial-gradient(ellipse at 50% 120%, rgba(109, 179, 255, 0.16), transparent 55%);
+  pointer-events: none;
+  animation: pcFloat 14s ease-in-out infinite;
+}
 .introLead {
+  position: relative;
   max-width: 900px;
   margin: 0 auto;
   font-family: "Hanken Grotesk";
   font-weight: 500;
   font-size: clamp(1.15rem, 2.6vw, 1.9rem);
-  line-height: 1.45;
+  line-height: 1.25;
   text-wrap: pretty;
 }
+.introLead strong {
+  font-weight: 800;
+}
 .introText {
-  max-width: 720px;
-  margin: 1.6rem auto 0;
+  position: relative;
+  max-width: 900px;
+  margin: 2rem auto 0;
   font-family: "Fraunces", serif;
   font-style: italic;
   font-size: clamp(1.05rem, 2.2vw, 1.4rem);
-  line-height: 1.5;
+  line-height: 1.3;
   color: var(--peach);
   text-wrap: pretty;
+  background: rgba(6, 26, 52, 0.55);
+  border: 1px solid rgba(109, 179, 255, 0.3);
+  border-radius: 16px;
+  padding: 1.4rem clamp(1.5rem, 4vw, 2.5rem);
+  backdrop-filter: blur(2px);
+}
+.introText strong {
+  font-weight: 700;
+  color: var(--cream);
 }
 
 /* ============ QUÉ NOS DIFERENCIA ============ */
 .diferenciaInner {
-  max-width: 900px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 6vw, 4.5rem);
+  align-items: center;
+  max-width: 1120px;
 }
 .diferenciaInner .h2 {
   margin: 0 0 2rem;
@@ -238,14 +279,58 @@
 .diferenciaText {
   max-width: 62ch;
 }
+.diferenciaText .body {
+  line-height: 1.4;
+}
+.diferenciaText .bodyStrong {
+  line-height: 1.3;
+}
+.diferenciaFigure {
+  align-self: stretch;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.diferenciaFigure img {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 24px 50px -30px rgba(32, 28, 21, 0.6);
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.diferenciaFigure:hover img {
+  transform: scale(1.05);
+}
+@media (max-width: 820px) {
+  .diferenciaInner {
+    grid-template-columns: 1fr;
+  }
+  .diferenciaFigure img {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+}
 
 /* ============ PILARES ============ */
 .pilares {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(135deg, var(--dark-1) 0%, var(--dark-2) 100%);
   color: var(--cream);
   padding: clamp(5rem, 13vh, 9rem) clamp(1.25rem, 5vw, 4rem);
 }
+.pilaresGlow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% -20%, rgba(109, 179, 255, 0.3), transparent 55%),
+    radial-gradient(ellipse at 50% 120%, rgba(109, 179, 255, 0.16), transparent 55%);
+  pointer-events: none;
+  animation: pcFloat 16s ease-in-out infinite;
+}
 .pilaresInner {
+  position: relative;
   max-width: 1280px;
   margin: 0 auto;
 }
@@ -284,6 +369,12 @@
   color: var(--peach);
   opacity: 0.7;
   margin-bottom: 1.4rem;
+  transition:
+    opacity 0.4s,
+    transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.pilarCard:hover .pilarNum {
+  transform: translateX(4px);
 }
 .pilarTitle {
   font-family: "Fraunces", serif;
@@ -327,6 +418,10 @@
   background-color: var(--sand-2);
   background-size: cover;
   background-position: center;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.expCard:hover .expFoto {
+  transform: scale(1.07);
 }
 .expChip {
   position: absolute;
@@ -341,6 +436,13 @@
   text-transform: uppercase;
   padding: 0.45em 0.9em;
   border-radius: 100px;
+  transition:
+    transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+    background 0.4s;
+}
+.expCard:hover .expChip {
+  transform: translateY(-3px);
+  background: var(--rust);
 }
 .expBody {
   padding: 2rem clamp(1.6rem, 3vw, 2.2rem) 2.2rem;
@@ -374,11 +476,23 @@
   border-radius: 100px;
   font-weight: 700;
   font-size: 0.9rem;
-  transition: background 0.3s;
+  transition:
+    background 0.3s,
+    transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.3s;
+}
+.expCta span {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 }
 .expCta:hover {
   color: #fff;
   background: var(--rust-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -14px rgba(7, 128, 254, 0.7);
+}
+.expCta:hover span {
+  transform: translateX(5px);
 }
 
 /* ============ FILOSOFÍA ============ */
@@ -394,6 +508,7 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at 50% -20%, rgba(109, 179, 255, 0.3), transparent 55%);
+  animation: pcFloat 15s ease-in-out infinite;
 }
 .filosofiaInner {
   position: relative;
@@ -428,6 +543,10 @@
 .bonoText .h2 {
   margin: 0 0 1.6rem;
 }
+.bonoText strong {
+  color: var(--ink);
+  font-weight: 700;
+}
 .bonoCollage {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -444,18 +563,18 @@
     box-shadow 0.45s,
     filter 0.45s;
 }
-.bonoFoto:nth-child(1),
+.bonoFoto:nth-child(2),
 .bonoFoto:nth-child(4) {
-  transform: translateY(-1.2rem);
+  transform: translateY(1.6rem);
 }
 .bonoFoto:hover {
   transform: scale(1.04);
   box-shadow: 0 26px 50px -30px rgba(32, 28, 21, 0.6);
   filter: saturate(1.08);
 }
-.bonoFoto:nth-child(1):hover,
+.bonoFoto:nth-child(2):hover,
 .bonoFoto:nth-child(4):hover {
-  transform: translateY(-1.2rem) scale(1.04);
+  transform: translateY(1.6rem) scale(1.04);
 }
 
 /* ============ TESTIMONIOS (video) ============ */
@@ -468,6 +587,23 @@
   border-top: 1px solid rgba(32, 28, 21, 0.12);
   border-bottom: 1px solid rgba(32, 28, 21, 0.12);
   overflow: hidden;
+}
+.testimoniosTitle {
+  position: absolute;
+  top: clamp(1.1rem, 3vw, 2rem);
+  left: clamp(1.25rem, 4vw, 2.6rem);
+  z-index: 3;
+  margin: 0;
+  white-space: nowrap;
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  font-size: clamp(0.85rem, 2.6vw, 1.9rem);
+  color: var(--cream);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
 }
 .testimoniosVideo {
   display: block;
@@ -503,7 +639,8 @@
   position: absolute;
   inset: -10px;
   border-radius: 50%;
-  border: 2px solid rgba(37, 99, 235, 0.35);
+  border: 2px solid rgba(37, 99, 235, 0.5);
+  animation: pcPulseRing 2.4s ease-out infinite;
 }
 .testimoniosPlay:hover {
   background: #1d4ed8;
@@ -532,6 +669,7 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at 50% 120%, rgba(7, 128, 254, 0.35), transparent 60%);
+  animation: pcFloat 17s ease-in-out infinite;
 }
 .cierreInner {
   position: relative;
@@ -562,8 +700,14 @@
   border-radius: 100px;
   font-weight: 700;
   font-size: 1rem;
+  transition:
+    background 0.3s,
+    transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.3s;
 }
 .cierreCta:hover {
   color: #fff;
   background: var(--rust-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px -16px rgba(7, 128, 254, 0.75);
 }

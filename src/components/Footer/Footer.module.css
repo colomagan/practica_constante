@@ -35,6 +35,15 @@
   color: rgba(241, 234, 220, 0.7);
   font-size: 0.9rem;
 }
+.iconLink {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(241, 234, 220, 0.7);
+  transition: color 0.2s ease;
+}
+.iconLink:hover {
+  color: var(--cream);
+}
 
 .copy {
   max-width: 1280px;
@@ -43,40 +52,4 @@
   border-top: 1px solid rgba(241, 234, 220, 0.12);
   font-size: 0.8rem;
   color: rgba(241, 234, 220, 0.45);
-}
-
-/* Crédito de desarrollo · estilo Aires-Soft (fondo negro, acento azul) */
-.dev {
-  position: relative;
-  background: #0a0a0c;
-  padding: 1.75rem clamp(1.25rem, 5vw, 4rem);
-  text-align: center;
-  overflow: hidden;
-}
-.dev::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(32, 148, 255, 0.4), transparent);
-}
-.devText {
-  margin: 0;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
-}
-.devLink {
-  font-weight: 700;
-  background: linear-gradient(135deg, #2094ff, #60b5ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: opacity 0.2s ease;
-}
-.devLink:hover {
-  opacity: 0.75;
 }

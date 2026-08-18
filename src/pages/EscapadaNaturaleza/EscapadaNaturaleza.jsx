@@ -1,25 +1,31 @@
+import { useState, useEffect, useRef } from 'react'
 import Nav from '../../components/Nav/Nav.jsx'
 import Footer from '../../components/Footer/Footer.jsx'
 import WhatsAppButton from '../../components/WhatsAppButton/WhatsAppButton.jsx'
 import Reveal from '../../components/Reveal/Reveal.jsx'
 import styles from './EscapadaNaturaleza.module.css'
 import heroImg from '../../assets/escapada/hero.jpg'
+import heroVideo from '../../assets/video/Recap Escapada (corto).mp4'
 import lugarImg from '../../assets/escapada/lugar.jpg'
-import gal1 from '../../assets/escapada/gal-1.jpg'
-import gal2 from '../../assets/escapada/gal-2.jpg'
-import gal3 from '../../assets/escapada/gal-3.jpg'
-import gal4 from '../../assets/escapada/gal-4.jpg'
+import gal1 from '../../assets/galeria/DSC07781.jpg'
+import gal2 from '../../assets/galeria/IMG_0209.jpg'
+import gal3 from '../../assets/galeria/IMG_0445.jpg'
+import gal4 from '../../assets/galeria/IMG_0622.jpg'
+import gal5 from '../../assets/galeria/IMG_0766.jpeg'
 import bonoFotoImg from '../../assets/escapada/team-bono.jpg'
 import marianaImg from '../../assets/profesores/mariana.jpg'
 import federicoImg from '../../assets/profesores/federico.jpg'
 import mauroImg from '../../assets/profesores/mauro.jpg'
 import hugoImg from '../../assets/hugo/hugo.png'
+import testimoniosVideo from '../../assets/video/testimonios.mp4'
+import testimoniosPoster from '../../assets/video/testimonios-poster.jpg'
 
 const GALERIA = [
-  { img: gal1, alt: 'Grupo en un cerro al atardecer' },
-  { img: gal2, alt: 'Entrenamiento en la playa' },
-  { img: gal3, alt: 'Comida compartida en Casa La Paloma' },
-  { img: gal4, alt: 'Entrenamiento en anillas al aire libre' },
+  { img: gal1, alt: 'Momento de la Escapada Naturaleza' },
+  { img: gal2, alt: 'Momento de la Escapada Naturaleza' },
+  { img: gal3, alt: 'Momento de la Escapada Naturaleza' },
+  { img: gal4, alt: 'Momento de la Escapada Naturaleza' },
+  { img: gal5, alt: 'Momento de la Escapada Naturaleza' },
 ]
 
 const ASPECTOS = [
@@ -192,7 +198,7 @@ const EQUIPO = [
   },
   {
     nombre: 'Federico Mulet',
-    rol: 'Instructor de Movimiento · Fundador de Manada',
+    rol: 'Fundador de Manada · Instructor de Movimiento',
     foto: '[ foto — Federico ]',
     img: federicoImg,
     parrafos: [
@@ -250,33 +256,233 @@ const FAQ = [
   },
 ]
 
+const WHATSAPP = 'https://wa.link/dukhvd'
+
+function EquipoCard({ m, delay }) {
+  const [abierto, setAbierto] = useState(false)
+  const [primerParrafo, ...resto] = m.parrafos
+
+  return (
+    <Reveal as="article" delay={delay} className={styles.equipoCard}>
+      {m.img ? (
+        <img className={styles.equipoFoto} src={m.img} alt={m.nombre} loading="lazy" />
+      ) : (
+        <div className={styles.equipoFoto}>{m.foto}</div>
+      )}
+      <div className={styles.equipoBody}>
+        <h3 className={styles.equipoNombre}>{m.nombre}</h3>
+        <p className={styles.equipoRol}>{m.rol}</p>
+        <p className={styles.equipoParrafo}>{primerParrafo}</p>
+        {abierto &&
+          resto.map((p, j) => (
+            <p key={j} className={styles.equipoParrafo}>
+              {p}
+            </p>
+          ))}
+        {resto.length > 0 && (
+          <button
+            type="button"
+            className={styles.verMas}
+            onClick={() => setAbierto((v) => !v)}
+            aria-expanded={abierto}
+          >
+            {abierto ? 'Ver menos' : 'Ver más'}
+          </button>
+        )}
+      </div>
+    </Reveal>
+  )
+}
+
+function Galeria() {
+  const [index, setIndex] = useState(0)
+  const [lightbox, setLightbox] = useState(false)
+  const n = GALERIA.length
+
+  const go = (dir) => setIndex((i) => (i + dir + n) % n)
+  const prev = () => go(-1)
+  const next = () => go(1)
+
+  useEffect(() => {
+    if (!lightbox) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') setLightbox(false)
+      else if (e.key === 'ArrowLeft') prev()
+      else if (e.key === 'ArrowRight') next()
+    }
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [lightbox, n])
+
+  return (
+    <section className={styles.galeria}>
+      <div className={styles.galeriaInner}>
+        <Reveal as="p" className={styles.eyebrow}>
+          Galería de la experiencia
+        </Reveal>
+
+        <div className={styles.carousel}>
+          <button
+            type="button"
+            className={`${styles.carArrow} ${styles.carArrowLeft}`}
+            onClick={prev}
+            aria-label="Foto anterior"
+          >
+            ‹
+          </button>
+
+          <div className={styles.carViewport}>
+            <div
+              className={styles.carTrack}
+              style={{ transform: `translateX(-${index * 100}%)` }}
+            >
+              {GALERIA.map((g, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  className={styles.carSlide}
+                  onClick={() => setLightbox(true)}
+                  aria-label={`Ampliar foto ${i + 1}`}
+                  tabIndex={i === index ? 0 : -1}
+                >
+                  <img
+                    className={styles.carFoto}
+                    src={g.img}
+                    alt={g.alt}
+                    loading="lazy"
+                  />
+                  <span className={styles.carZoom} aria-hidden="true">⤢</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className={`${styles.carArrow} ${styles.carArrowRight}`}
+            onClick={next}
+            aria-label="Foto siguiente"
+          >
+            ›
+          </button>
+        </div>
+
+        <div className={styles.carDots}>
+          {GALERIA.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              className={`${styles.carDot} ${i === index ? styles.carDotActive : ''}`}
+              onClick={() => setIndex(i)}
+              aria-label={`Ir a la foto ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {lightbox && (
+        <div
+          className={styles.lightbox}
+          onClick={() => setLightbox(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Galería ampliada"
+        >
+          <button
+            type="button"
+            className={styles.lbClose}
+            onClick={() => setLightbox(false)}
+            aria-label="Cerrar"
+          >
+            ×
+          </button>
+          <button
+            type="button"
+            className={`${styles.lbArrow} ${styles.lbArrowLeft}`}
+            onClick={(e) => {
+              e.stopPropagation()
+              prev()
+            }}
+            aria-label="Foto anterior"
+          >
+            ‹
+          </button>
+          <figure className={styles.lbFigure} onClick={(e) => e.stopPropagation()}>
+            <img className={styles.lbFoto} src={GALERIA[index].img} alt={GALERIA[index].alt} />
+            <figcaption className={styles.lbCaption}>
+              {index + 1} / {n}
+            </figcaption>
+          </figure>
+          <button
+            type="button"
+            className={`${styles.lbArrow} ${styles.lbArrowRight}`}
+            onClick={(e) => {
+              e.stopPropagation()
+              next()
+            }}
+            aria-label="Foto siguiente"
+          >
+            ›
+          </button>
+        </div>
+      )}
+    </section>
+  )
+}
+
 export default function EscapadaNaturaleza() {
+  const testimoniosRef = useRef(null)
+  const [testimoniosPlaying, setTestimoniosPlaying] = useState(false)
+
+  const playTestimonios = () => {
+    const v = testimoniosRef.current
+    if (!v) return
+    v.play()
+    setTestimoniosPlaying(true)
+  }
+
   return (
     <div className={styles.page}>
-      <Nav reservarHref="#reservar" />
+      <Nav reservarHref={WHATSAPP} />
 
       {/* ===== HERO ===== */}
       <section id="top" className={styles.hero}>
-        <div
+        <video
           className={styles.heroBg}
-          style={{ backgroundImage: `url(${heroImg})` }}
+          src={heroVideo}
+          poster={heroImg}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
         />
         <div className={styles.heroScrim} />
         <div className={styles.heroInner}>
-          <p className={styles.heroKicker}>Escapada · Edición vigente</p>
-          <h1 className={styles.heroTitle}>
+          <p className={`${styles.heroKicker} pcHeroReveal`} style={{ animationDelay: '0.1s' }}>
+            5ta Edición
+          </p>
+          <h1 className={`${styles.heroTitle} pcHeroReveal`} style={{ animationDelay: '0.25s' }}>
             Escapada
-            <br />
-            Naturaleza
           </h1>
-          <p className={styles.heroSub}>
+          <p className={`${styles.heroSub} pcHeroReveal`} style={{ animationDelay: '0.45s' }}>
             Cinco días para salir de la rutina y volver a conectar con lo esencial.
           </p>
-          <div className={styles.heroTags}>
+          <div className={`${styles.heroTags} pcHeroReveal`} style={{ animationDelay: '0.6s' }}>
             <span className={styles.heroTag}>📍 Chapadmalal, Mar del Plata</span>
             <span className={styles.heroTag}>📅 8 al 12 de octubre de 2026</span>
           </div>
-          <a href="#reservar" className={styles.heroCta}>
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${styles.heroCta} pcHeroReveal`}
+            style={{ animationDelay: '0.78s' }}
+          >
             Reservar mi lugar
           </a>
         </div>
@@ -299,19 +505,19 @@ export default function EscapadaNaturaleza() {
       {/* ===== QUÉ ES ===== */}
       <section className={styles.section}>
         <div className={styles.queEsGrid}>
-          <Reveal>
+          <Reveal variant="left">
             <p className={styles.eyebrow}>Qué es</p>
             <h2 className={styles.h2}>¿Qué es Escapada Naturaleza?</h2>
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} variant="right">
             <p className={styles.lead}>
               No es un retiro tradicional. No es un curso intensivo. No son simplemente
               vacaciones.
             </p>
             <p className={styles.body}>
-              Escapada Naturaleza es una experiencia diseñada para quienes desean entrenar el
-              cuerpo desde una mirada integral, desarrollar nuevas capacidades y regalarse unos
-              días lejos del ritmo cotidiano.
+              Escapada Naturaleza es una <strong>experiencia</strong> diseñada para quienes
+              desean entrenar el cuerpo desde una mirada integral, desarrollar nuevas capacidades
+              y regalarse unos días lejos del ritmo cotidiano.
             </p>
             <p className={styles.body}>
               Durante cinco días compartimos movimiento, respiración, creatividad, naturaleza y
@@ -362,6 +568,9 @@ export default function EscapadaNaturaleza() {
         </Reveal>
       </section>
 
+      {/* ===== GALERÍA ===== */}
+      <Galeria />
+
       {/* ===== QUÉ VAS A VIVIR ===== */}
       <section className={styles.section}>
         <Reveal as="p" className={styles.eyebrow}>
@@ -374,7 +583,7 @@ export default function EscapadaNaturaleza() {
         </Reveal>
         <div className={styles.aspectosGrid}>
           {ASPECTOS.map((a, i) => (
-            <Reveal key={a.titulo} delay={i * 0.06} className={styles.aspectoCard}>
+            <Reveal key={a.titulo} delay={i * 0.08} variant="scale" className={styles.aspectoCard}>
               <h3 className={styles.cardTitleRust}>{a.titulo}</h3>
               <p className={styles.cardBody}>{a.texto}</p>
             </Reveal>
@@ -395,7 +604,7 @@ export default function EscapadaNaturaleza() {
           </Reveal>
           <div className={styles.incluyeGrid}>
             {INCLUYE.map((item, i) => (
-              <Reveal key={item.titulo} delay={i * 0.06} className={styles.incluyeCard}>
+              <Reveal key={item.titulo} delay={i * 0.08} variant="scale" className={styles.incluyeCard}>
                 <h3 className={styles.cardTitlePeach}>{item.titulo}</h3>
                 <p className={styles.cardBodyLight}>{item.texto}</p>
                 {item.nota && <p className={styles.nota}>{item.nota}</p>}
@@ -424,6 +633,7 @@ export default function EscapadaNaturaleza() {
               <summary className={styles.daySummary}>
                 <span className={styles.dayTag}>{d.dia}</span>
                 <span className={styles.dayTitle}>{d.titulo}</span>
+                <span className={styles.dayCaret} aria-hidden="true">+</span>
               </summary>
               <div className={styles.dayBody}>
                 {d.bloques.map((b, i) => (
@@ -438,6 +648,46 @@ export default function EscapadaNaturaleza() {
         </div>
       </section>
 
+      {/* ===== PRECIO (zócalo) ===== */}
+      <section className={styles.precio}>
+        <Reveal className={styles.precioInner}>
+          <div className={styles.precioMonto}>
+            <span className={styles.precioLabel}>Inversión</span>
+            <span className={styles.precioCifra}>$600 USD</span>
+          </div>
+          <ul className={styles.precioList}>
+            <li>Se puede pagar en 2 cuotas sin interés.</li>
+            <li>Pago a través de transferencia (en pesos se cotiza al cambio oficial).</li>
+            <li>Los cupos son limitados.</li>
+          </ul>
+        </Reveal>
+      </section>
+
+      {/* ===== TESTIMONIOS (video) ===== */}
+      <section id="testimonios" className={styles.testimonios}>
+        <p className={styles.testimoniosTitle}>Testimonios de nuestros participantes</p>
+        <video
+          ref={testimoniosRef}
+          className={styles.testimoniosVideo}
+          src={testimoniosVideo}
+          poster={testimoniosPoster}
+          controls={testimoniosPlaying}
+          playsInline
+          preload="metadata"
+          onPlay={() => setTestimoniosPlaying(true)}
+        />
+        {!testimoniosPlaying && (
+          <button
+            type="button"
+            className={styles.testimoniosPlay}
+            onClick={playTestimonios}
+            aria-label="Reproducir video de testimonios"
+          >
+            <span className={styles.testimoniosPlayIcon} />
+          </button>
+        )}
+      </section>
+
       {/* ===== EL LUGAR ===== */}
       <section className={styles.lugar}>
         <div
@@ -449,8 +699,9 @@ export default function EscapadaNaturaleza() {
           <p className={styles.eyebrowPeach}>El lugar</p>
           <h2 className={styles.lugarTitle}>Casa La Paloma</h2>
           <p className={styles.lugarText}>
-            Un espacio pensado para descansar, compartir y entrenar a pocos metros del mar. La
-            naturaleza deja de ser el escenario para convertirse en parte de la experiencia.
+            Un espacio pensado para descansar, compartir y entrenar a pocos metros del mar.
+            <br />
+            La naturaleza deja de ser el escenario para convertirse en parte de la experiencia.
           </p>
         </Reveal>
       </section>
@@ -472,59 +723,27 @@ export default function EscapadaNaturaleza() {
         </Reveal>
         <div className={styles.equipoGrid}>
           {EQUIPO.map((m, i) => (
-            <Reveal as="article" key={m.nombre} delay={i * 0.06} className={styles.equipoCard}>
-              {m.img ? (
-                <img className={styles.equipoFoto} src={m.img} alt={m.nombre} loading="lazy" />
-              ) : (
-                <div className={styles.equipoFoto}>{m.foto}</div>
-              )}
-              <div className={styles.equipoBody}>
-                <h3 className={styles.equipoNombre}>{m.nombre}</h3>
-                <p className={styles.equipoRol}>{m.rol}</p>
-                {m.parrafos.map((p, j) => (
-                  <p key={j} className={styles.equipoParrafo}>
-                    {p}
-                  </p>
-                ))}
-              </div>
-            </Reveal>
+            <EquipoCard key={m.nombre} m={m} delay={i * 0.06} />
           ))}
         </div>
-        <Reveal as="p" delay={0.2} className={styles.quoteLg}>
-          Cada edición es el resultado del trabajo conjunto de un equipo que comparte una misma
-          filosofía: aprender desde la práctica, respetar los tiempos de cada persona y crear un
-          espacio donde el movimiento sea una herramienta para conectar con uno mismo, con los
-          demás y con el entorno.
-        </Reveal>
-      </section>
-
-      {/* ===== GALERÍA ===== */}
-      <section className={styles.galeria}>
-        <div className={styles.galeriaInner}>
-          <Reveal as="p" className={styles.eyebrow}>
-            Galería de la experiencia
+        <div className={styles.quoteBand}>
+          <div className={styles.quoteGlow} />
+          <Reveal as="p" delay={0.2} className={styles.quoteLg}>
+            Cada edición es el resultado del trabajo conjunto de un equipo que comparte una misma
+            filosofía: aprender desde la práctica, respetar los tiempos de cada persona y crear un
+            espacio donde el movimiento sea una herramienta para conectar con uno mismo, con los
+            demás y con el entorno.
           </Reveal>
-          <div className={styles.galeriaGrid}>
-            {GALERIA.map((g, n) => (
-              <img
-                key={n}
-                className={styles.galeriaFoto}
-                src={g.img}
-                alt={g.alt}
-                loading="lazy"
-              />
-            ))}
-          </div>
         </div>
       </section>
 
       {/* ===== LA MASCOTA · HUGO ===== */}
       <section id="hugo" className={styles.hugo}>
         <div className={styles.hugoGrid}>
-          <Reveal className={styles.hugoImgWrap}>
+          <Reveal variant="left" className={styles.hugoImgWrap}>
             <img className={styles.hugoImg} src={hugoImg} alt="Hugo, la mascota de Práctica Constante" />
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} variant="right">
             <p className={styles.eyebrowPeach}>La mascota</p>
             <h2 className={styles.h2Light}>Conocé a Hugo</h2>
             <p className={styles.hugoText}>
@@ -568,11 +787,11 @@ export default function EscapadaNaturaleza() {
         <div className={styles.ctaGlow} />
         <Reveal className={styles.ctaInner}>
           <h2 className={styles.ctaTitle}>
-            Regalarte cinco días
+            Regalarte 5 días
             <br />
-            puede cambiar mucho
+            puede cambiar mucho más que
             <br />
-            más que una semana.
+            una semana.
           </h2>
           <p className={styles.ctaText}>
             Escapada Naturaleza es una invitación a entrenar, aprender y compartir desde otro
@@ -581,14 +800,19 @@ export default function EscapadaNaturaleza() {
           <p className={styles.ctaTextSm}>
             Los grupos son reducidos para cuidar la calidad de la experiencia.
           </p>
-          <a href="#reservar" className={styles.ctaButton}>
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.ctaButton}
+          >
             Reservar mi lugar
           </a>
         </Reveal>
       </section>
 
       <Footer subtitle="Escapada Naturaleza · Chapadmalal 2026" />
-      <WhatsAppButton href="#reservar" />
+      <WhatsAppButton href={WHATSAPP} />
     </div>
   )
 }
