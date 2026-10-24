@@ -2,65 +2,189 @@
   position: relative;
   overflow-x: hidden;
 }
+
+/* ============ ELEMENTOS COMPARTIDOS ============ */
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 1.2rem;
+}
+.eyebrowPeach {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 1.2rem;
+}
+
+.h2 {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 5.5vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.h2Light {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 5.5vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+}
+
+.body {
+  color: var(--muted);
+  font-size: 1.06rem;
+  margin-bottom: 1.1rem;
+  text-wrap: pretty;
+}
+.body:last-child {
+  margin-bottom: 0;
+}
+.bodyWide {
+  color: var(--muted);
+  font-size: 1.06rem;
+  max-width: 60ch;
+  margin-top: 1.6rem;
+  margin-bottom: 2.6rem;
+  text-wrap: pretty;
+}
+
+.section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+/* ============ HERO ============ */
 .hero {
   position: relative;
   min-height: 100svh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 1rem;
-  padding: 8rem clamp(1.25rem, 5vw, 4rem) 5rem;
+  align-items: flex-end;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 8rem clamp(1.25rem, 5vw, 4rem) clamp(4rem, 10vh, 6rem);
   overflow: hidden;
 }
 .heroBg {
   position: absolute;
   inset: 0;
   z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   background-color: #0a1f37;
   background-size: cover;
   background-position: center;
-  animation: pcKenBurns 18s ease-in-out infinite alternate;
+  animation: pcKenBurns 20s ease-in-out infinite alternate;
 }
 .heroScrim {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  background: linear-gradient(to bottom, rgba(10, 24, 45, 0.6), rgba(10, 24, 45, 0.82));
+  z-index: 2;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(9, 20, 34, 0.55) 0%,
+      rgba(9, 20, 34, 0.35) 35%,
+      rgba(9, 20, 34, 0.9) 100%
+    ),
+    linear-gradient(to right, rgba(9, 20, 34, 0.55) 0%, rgba(9, 20, 34, 0) 55%);
 }
 .heroInner {
   position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  z-index: 3;
+  max-width: 1150px;
 }
-.kicker {
+.heroKicker {
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(241, 234, 220, 0.7);
+  color: var(--peach);
+  margin-bottom: 1rem;
 }
-.title {
+.heroTitle {
   font-family: "Hanken Grotesk";
   font-weight: 800;
   text-transform: uppercase;
   color: var(--cream);
-  font-size: clamp(2.6rem, 10vw, 7rem);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  font-size: clamp(3.4rem, 15vw, 10rem);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
 }
-.sub {
+.heroTitle span {
+  display: block;
+}
+.heroSub {
+  margin-top: 1.6rem;
   font-family: "Fraunces", serif;
   font-style: italic;
-  font-size: clamp(1.05rem, 2.4vw, 1.4rem);
-  color: rgba(241, 234, 220, 0.85);
-  max-width: 46ch;
+  font-size: clamp(1.05rem, 2.4vw, 1.6rem);
+  color: rgba(241, 234, 220, 0.9);
+  max-width: 40ch;
+  text-wrap: pretty;
 }
-.cta {
+.heroTags {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+}
+/* Wireframe de tensegridad sobre el hero */
+.heroTense {
+  position: absolute;
+  z-index: 3;
+  top: clamp(5.5rem, 14vh, 9rem);
+  right: clamp(1.5rem, 6vw, 6rem);
+  width: clamp(120px, 22vw, 260px);
+  height: auto;
+  color: var(--peach);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 18px rgba(109, 179, 255, 0.35));
+  animation: pcFloat 14s ease-in-out infinite;
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  .heroTense {
+    width: 140px;
+    top: 6rem;
+    right: 1rem;
+    opacity: 0.6;
+  }
+}
+.heroTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  background: rgba(241, 234, 220, 0.1);
+  border: 1px solid rgba(241, 234, 220, 0.25);
+  color: var(--cream);
+  padding: 0.55em 1.1em;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.heroTag:hover {
+  background: rgba(241, 234, 220, 0.18);
+  border-color: rgba(109, 179, 255, 0.6);
+  transform: translateY(-3px);
+}
+.heroCta {
   display: inline-flex;
   align-items: center;
   background: var(--rust);
@@ -68,15 +192,488 @@
   padding: 1em 2.2em;
   border-radius: 100px;
   font-weight: 700;
-  margin-top: 1rem;
+  font-size: 0.95rem;
+  margin-top: 2rem;
   transition:
     background 0.3s,
     transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
     box-shadow 0.3s;
 }
-.cta:hover {
+.heroCta:hover {
   color: #fff;
   background: var(--rust-dark);
   transform: translateY(-3px);
   box-shadow: 0 16px 34px -14px rgba(7, 128, 254, 0.7);
+}
+.scrollDown {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  color: rgba(241, 234, 220, 0.7);
+}
+.scrollCircle {
+  display: block;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(241, 234, 220, 0.4);
+  border-radius: 50%;
+  position: relative;
+  animation: pcBounce 2.2s ease-in-out infinite;
+}
+.scrollArrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--cream);
+  border-bottom: 1.5px solid var(--cream);
+  transform: translate(-50%, -70%) rotate(45deg);
+}
+
+/* ============ INTRO BAND ============ */
+.introBand {
+  background: var(--olive);
+  color: var(--olive-warm);
+  padding: clamp(4rem, 10vh, 7rem) clamp(1.25rem, 5vw, 4rem);
+  text-align: center;
+}
+.introText {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Hanken Grotesk";
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2.6vw, 1.9rem);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.introEm {
+  font-family: "Fraunces", serif;
+  color: var(--peach);
+}
+
+/* ============ QUÉ ES ============ */
+.queEsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+.lead {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-bottom: 1.4rem;
+}
+.narFigure {
+  margin-top: 2rem;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--sand-2);
+  box-shadow: 0 30px 60px -40px rgba(9, 20, 34, 0.6);
+}
+.narFigure img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.narFigure:hover img {
+  transform: scale(1.04);
+}
+
+/* ============ DOS MOMENTOS ============ */
+.momentosGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+  margin-top: 2.6rem;
+}
+.momentoCard {
+  position: relative;
+  overflow: hidden;
+  background: rgba(241, 234, 220, 0.05);
+  border: 1px solid rgba(241, 234, 220, 0.14);
+  border-radius: 18px;
+  padding: 2.2rem;
+  transition:
+    transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+    background 0.4s,
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+.momentoCard:hover {
+  transform: translateY(-6px);
+  background: rgba(241, 234, 220, 0.09);
+  border-color: rgba(109, 179, 255, 0.45);
+  box-shadow: 0 30px 55px -35px rgba(0, 0, 0, 0.6);
+}
+.momentoTense {
+  position: absolute;
+  top: -1.2rem;
+  right: -1.2rem;
+  width: 120px;
+  height: auto;
+  color: var(--peach);
+  opacity: 0.16;
+  pointer-events: none;
+  transition: opacity 0.4s, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.momentoCard:hover .momentoTense {
+  opacity: 0.32;
+  transform: rotate(45deg) scale(1.05);
+}
+
+/* ============ ESTRUCTURA DE LA JORNADA (cards oscuras) ============ */
+.estructura {
+  background: linear-gradient(135deg, var(--dark-1) 0%, var(--dark-2) 100%);
+  color: var(--cream);
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.25rem, 5vw, 4rem);
+}
+.estructuraInner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.estructuraInner .h2Light {
+  margin-bottom: 1rem;
+}
+.estructuraGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2.6rem;
+}
+.estructuraCard {
+  position: relative;
+  background: rgba(241, 234, 220, 0.05);
+  border: 1px solid rgba(241, 234, 220, 0.14);
+  border-radius: 16px;
+  padding: 1.9rem;
+  transition:
+    transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+    background 0.4s,
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+.estructuraCard:hover {
+  transform: translateY(-6px);
+  background: rgba(241, 234, 220, 0.09);
+  border-color: rgba(255, 190, 152, 0.45);
+  box-shadow: 0 30px 55px -35px rgba(0, 0, 0, 0.6);
+}
+.estructuraNum {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  color: rgba(255, 190, 152, 0.6);
+  margin-bottom: 0.7rem;
+}
+.cardTitlePeach {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: var(--peach);
+  text-wrap: balance;
+}
+.cardBodyLight {
+  color: rgba(241, 234, 220, 0.78);
+  font-size: 0.98rem;
+  text-wrap: pretty;
+}
+
+/* ============ INSTRUCTORES ============ */
+.instructoresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+  margin-top: 2.6rem;
+}
+.instCard {
+  background: var(--sand);
+  border: 1px solid rgba(32, 28, 21, 0.1);
+  border-left: 4px solid var(--rust);
+  border-radius: 16px;
+  padding: 1.9rem;
+  transition:
+    transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.4s,
+    border-color 0.4s;
+}
+.instCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 50px -32px rgba(32, 28, 21, 0.55);
+}
+.instNombre {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: 1.55rem;
+  margin-bottom: 0.35rem;
+  color: var(--ink);
+}
+.instRol {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* ============ PARA QUIÉN + MATERIALES ============ */
+.prepBand {
+  background: var(--sand);
+  border-top: 1px solid rgba(32, 28, 21, 0.12);
+  padding: clamp(5rem, 13vh, 9rem) clamp(1.25rem, 5vw, 4rem);
+}
+.prepGrid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+.prepCol .h2 {
+  margin-bottom: 1.8rem;
+}
+.paraQuienList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+.paraQuienList li {
+  position: relative;
+  padding-left: 1.9rem;
+  font-size: 1.06rem;
+  line-height: 1.45;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.paraQuienList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--rust);
+  transform: rotate(45deg);
+}
+.materialesList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+.materialItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--cream);
+  border: 1px solid rgba(32, 28, 21, 0.1);
+  border-radius: 14px;
+  padding: 0.9rem 1.1rem;
+  font-size: 1.05rem;
+  color: var(--ink);
+  transition:
+    transform 0.35s cubic-bezier(0.19, 1, 0.22, 1),
+    border-color 0.35s,
+    box-shadow 0.35s;
+}
+.materialItem:hover {
+  transform: translateX(4px);
+  border-color: rgba(7, 128, 254, 0.4);
+  box-shadow: 0 14px 30px -22px rgba(9, 20, 34, 0.6);
+}
+.materialIcono {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--sand);
+  font-size: 1.25rem;
+}
+
+/* ============ INSCRIPCIÓN (zócalo) ============ */
+.precio {
+  background: var(--rust);
+  color: #fff;
+  padding: clamp(2.5rem, 7vh, 4rem) clamp(1.25rem, 5vw, 4rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.precioInner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+.precioMonto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.precioLabel {
+  font-family: "Hanken Grotesk";
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.55rem;
+}
+.precioCifra {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.6rem, 7vw, 4.2rem);
+  color: #fff;
+}
+.precioList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  max-width: 34rem;
+}
+.precioList li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.45;
+}
+.precioList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* ============ ADEMÁS (nota) ============ */
+.extra {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(4rem, 10vh, 7rem) clamp(1.25rem, 5vw, 4rem);
+}
+.extraCard {
+  background: var(--sand);
+  border: 1px solid rgba(32, 28, 21, 0.12);
+  border-left: 4px solid var(--peach);
+  border-radius: 16px;
+  padding: clamp(1.6rem, 4vw, 2.6rem);
+}
+.extraTitle {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  color: var(--ink);
+  margin-bottom: 0.9rem;
+}
+.extraText {
+  color: var(--muted);
+  font-size: 1.06rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* ============ CTA FINAL ============ */
+.cta {
+  position: relative;
+  background: var(--ink);
+  color: var(--cream);
+  padding: clamp(5rem, 15vh, 10rem) clamp(1.25rem, 5vw, 4rem);
+  text-align: center;
+  overflow: hidden;
+}
+.ctaGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 120%, rgba(7, 128, 254, 0.35), transparent 60%);
+  animation: pcFloat 17s ease-in-out infinite;
+}
+.ctaInner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.ctaKicker {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 1.2rem;
+}
+.ctaTense {
+  position: absolute;
+  z-index: 1;
+  right: clamp(1rem, 8vw, 7rem);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(160px, 26vw, 320px);
+  height: auto;
+  color: var(--peach);
+  opacity: 0.12;
+  pointer-events: none;
+  animation: pcFloat 16s ease-in-out infinite;
+}
+.ctaTitle {
+  font-family: "Hanken Grotesk";
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 6.5vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.4rem;
+}
+.ctaText {
+  font-size: 1.15rem;
+  color: rgba(241, 234, 220, 0.8);
+  max-width: 52ch;
+  margin: 0 auto 1rem;
+  text-wrap: pretty;
+}
+.ctaTextSm {
+  font-size: 1rem;
+  color: rgba(241, 234, 220, 0.6);
+  margin-bottom: 2.4rem;
+}
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  background: var(--rust);
+  color: #fff;
+  padding: 1.1em 2.6em;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition:
+    background 0.3s,
+    transform 0.3s cubic-bezier(0.19, 1, 0.22, 1),
+    box-shadow 0.3s;
+}
+.ctaButton:hover {
+  color: #fff;
+  background: var(--rust-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px -16px rgba(7, 128, 254, 0.75);
 }

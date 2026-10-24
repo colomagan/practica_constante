@@ -620,10 +620,10 @@ export default function EscapadaNaturaleza() {
           Itinerario
         </Reveal>
         <Reveal as="h2" delay={0.06} className={styles.h2}>
-          Cinco días de práctica
+          Una Experiencia Integral
         </Reveal>
         <Reveal as="p" delay={0.1} className={styles.bodyWide}>
-          Cinco días para entrenar el cuerpo, desarrollar criterio, crear junto a otros y
+          Tres días para entrenar el cuerpo, desarrollar criterio, crear junto a otros y
           construir herramientas que sigan funcionando cuando vuelvas a casa.
         </Reveal>
 

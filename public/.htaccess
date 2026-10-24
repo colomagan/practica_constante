@@ -1,0 +1,10 @@
+# SPA fallback: sirve index.html para cualquier ruta que no sea un archivo/carpeta real.
+# Necesario para que /labs, /escapada, etc. funcionen al entrar directo o recargar (F5).
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
